@@ -159,7 +159,7 @@ class OGRGeometryField(forms.GeometryField):
         sref = None
         # Work with a single GeoJSON geometry or a Feature.
         value = json.loads(value) if '"Feature"' in value else value
-        if isinstance(value, collections.Mapping):
+        if isinstance(value, collections.abc.Mapping):
             feat = sc.as_feature(value)
             value = json.dumps(feat.get("geometry") or value)
             sref = feat.srs

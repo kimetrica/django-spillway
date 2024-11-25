@@ -41,7 +41,7 @@ class GeometryField(Field):
 
     def to_internal_value(self, data):
         # forms.GeometryField cannot handle geojson dicts.
-        if isinstance(data, collections.Mapping):
+        if isinstance(data, collections.abc.Mapping):
             data = json.dumps(data)
         field = fields.GeometryField(widget=forms.BaseGeometryWidget())
         return field.to_python(data)

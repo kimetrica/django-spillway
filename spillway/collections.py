@@ -16,13 +16,13 @@ def as_feature(data):
             data = Feature(**data)
         elif has_features(data):
             data = FeatureCollection(**data)
-        elif isinstance(data, collections.Sequence):
+        elif isinstance(data, collections.abc.Sequence):
             data = FeatureCollection(features=data)
         elif has_layer(data):
             data = LayerCollection(data)
         elif has_coordinates(data):
             data = Feature(geometry=data)
-        elif isinstance(data, collections.Mapping) and not data:
+        elif isinstance(data, collections.abc.Mapping) and not data:
             data = Feature()
     return data
 
@@ -136,7 +136,7 @@ class Feature(AbstractFeature):
         geom = self["geometry"] or "{}"
         keys = self.keys() - {"geometry"}
         props = json.dumps({k: self[k] for k in keys}, cls=JSONEncoder)[1:-1]
-        return '{"geometry": %s, %s}' % (str(geom), props)
+        return '{{"geometry": {}, {}}}'.format(str(geom), props)
 
 
 class FeatureCollection(AbstractFeature):
@@ -182,5 +182,5 @@ class LayerCollection(AbstractFeature):
 
     @property
     def geojson(self):
-        layers = ",".join(['"%s": %s' % (k, v.geojson) for k, v in self.items()])
+        layers = ",".join(['"{}": {}'.format(k, v.geojson) for k, v in self.items()])
         return "{%s}" % layers

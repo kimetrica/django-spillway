@@ -15,7 +15,7 @@ from .models import Location, RasterStore, _geom
 from .test_models import RasterStoreTestBase
 
 
-class RequestMock(object):
+class RequestMock:
     def __init__(self):
         self.accepted_renderer = renderers.JSONRenderer()
         self.GET = {}
@@ -112,7 +112,7 @@ class GeoModelSerializerTestCase(ModelTestCase):
 
 class FeatureSerializerTestCase(ModelTestCase):
     def setUp(self):
-        super(FeatureSerializerTestCase, self).setUp()
+        super().setUp()
         attrs = {
             "id": 1,
             "crs": 4326,
@@ -197,7 +197,7 @@ class FeatureSerializerTestCase(ModelTestCase):
 
 class RasterSerializerTestCase(RasterStoreTestBase):
     def setUp(self):
-        super(RasterSerializerTestCase, self).setUp()
+        super().setUp()
         self.request = RequestMock()
         self.ctx = {"request": self.request}
 

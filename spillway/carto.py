@@ -46,7 +46,7 @@ def build_map(querysets, tileform):
     return m
 
 
-class Map(object):
+class Map:
     mapfile = default_storage.path("map.xml")
 
     def __init__(self, width=256, height=256):
@@ -97,7 +97,7 @@ class Map(object):
             self.map.zoom_to_box(mapnik.Box2d(*bbox.extent))
 
 
-class Layer(object):
+class Layer:
     """Base class for a Mapnik layer."""
 
     def __getattr__(self, attr):

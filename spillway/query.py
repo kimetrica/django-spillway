@@ -20,7 +20,7 @@ def filter_geometry(queryset, **filters):
     usual "geometryfield__lookuptype" format.
     """
     fieldname = geo_field(queryset).name
-    query = {"%s__%s" % (fieldname, k): v for k, v in filters.items()}
+    query = {"{}__{}".format(fieldname, k): v for k, v in filters.items()}
     return queryset.filter(**query)
 
 

@@ -22,7 +22,7 @@ class GeoJSONRenderer(JSONRenderer):
         try:
             return data.geojson
         except AttributeError:
-            return super(GeoJSONRenderer, self).render(
+            return super().render(
                 data, accepted_media_type, renderer_context
             )
 
@@ -57,7 +57,7 @@ class KMZRenderer(KMLRenderer):
     format = "kmz"
 
     def render(self, *args, **kwargs):
-        kmldata = super(KMZRenderer, self).render(*args, **kwargs)
+        kmldata = super().render(*args, **kwargs)
         return compress_kml(kmldata)
 
 

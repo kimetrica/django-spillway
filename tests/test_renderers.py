@@ -98,7 +98,7 @@ class RasterRendererTestCase(RasterStoreTestBase):
         ext = rend.format
         if rend.format.endswith(".zip"):
             ext = os.path.splitext(rend.format)[0]
-        pat = "tmin_.+(?<!\.{0})\.{0}$".format(ext)
+        pat = r"tmin_.+(?<!\.{0})\.{0}$".format(ext)
         driver = driver_for_path(ext, ImageDriver.filter_copyable())
         qs = self.qs.warp(format=driver.ext, geom=geom)
         lst = [obj.raster() for obj in qs]
@@ -106,7 +106,7 @@ class RasterRendererTestCase(RasterStoreTestBase):
         fp = rend.render(rs.data)
         with zipfile.ZipFile(fp) as zf:
             for r, name in zip(lst, zf.namelist()):
-                self.assertRegexpMatches(name, pat)
+                self.assertRegex(name, pat)
                 imgdata = zf.read(name)
                 self.assert_format(imgdata, driver.format)
                 memio = MemFileIO()
