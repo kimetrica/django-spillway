@@ -22,7 +22,7 @@ class AbstractLocation(models.Model):
         ordering = ["id"]
 
     def __repr__(self):
-        return "<%s: %s %s>" % (self.__class__.__name__, self.name, self.geom)
+        return "<{}: {} {}>".format(self.__class__.__name__, self.name, self.geom)
 
     def __str__(self):
         return self.name

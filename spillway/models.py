@@ -17,7 +17,7 @@ _imgdrivers = greenwich.ImageDriver.filter_copyable()
 # Workaround for migrations and FileField upload_to, see:
 # https://code.djangoproject.com/ticket/22999
 @deconstructible
-class UploadDir(object):
+class UploadDir:
     def __init__(self, path):
         self.path = path
 

@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 @deconstructible
-class GeometrySizeValidator(object):
+class GeometrySizeValidator:
     """Field validator to limit geometries to a given area."""
 
     message = _("Max area exceeded.")

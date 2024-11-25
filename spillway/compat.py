@@ -18,7 +18,7 @@ try:
     import mapnik
 except ImportError:
 
-    class Mapnik(object):
+    class Mapnik:
         def __getattr__(self, attr):
             raise ImproperlyConfigured("Mapnik must be installed")
 

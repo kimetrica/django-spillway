@@ -76,7 +76,7 @@ class GeoTIFFZipRenderer(BaseGDALRenderer):
     def render(self, data, accepted_media_type=None, renderer_context=None):
         if len(data) > 1:
             raise ValueError("Expected one-length sequence")
-        return super(GeoTIFFZipRenderer, self).render(
+        return super().render(
             data[0], accepted_media_type, renderer_context
         )
 

@@ -12,7 +12,7 @@ class QuerySetForm(forms.Form):
     """Base form for applying GeoQuerySet methods and filters."""
 
     def __init__(self, data=None, queryset=None, *args, **kwargs):
-        super(QuerySetForm, self).__init__(data, *args, **kwargs)
+        super().__init__(data, *args, **kwargs)
         self.queryset = queryset
         self._is_selected = False
 
@@ -57,7 +57,7 @@ class SpatialQueryForm(QuerySetForm):
     bbox = fields.BoundingBoxField(required=False)
 
     def __init__(self, *args, **kwargs):
-        super(SpatialQueryForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         lookups = GeometryField.get_lookups()
         for lookup in self.data:
             if lookup in lookups:
@@ -67,7 +67,7 @@ class SpatialQueryForm(QuerySetForm):
                 break
 
     def clean(self):
-        cleaned_data = super(SpatialQueryForm, self).clean()
+        cleaned_data = super().clean()
         spatial_lookup = set(cleaned_data.keys()) - {"bbox"}
         bbox = cleaned_data.pop("bbox", None)
         # Look for "bbox" which is just an alias to "bboverlaps".
@@ -131,7 +131,7 @@ class RasterQueryForm(QuerySetForm):
         """Return cleaned fields as a dict, determine which geom takes
         precedence.
         """
-        data = super(RasterQueryForm, self).clean()
+        data = super().clean()
         geom = data.pop("upload", None) or data.pop("bbox", None)
         if geom:
             data["g"] = geom
@@ -170,7 +170,7 @@ class TileForm(QuerySetForm):
     z = forms.IntegerField()
 
     def clean(self):
-        data = super(TileForm, self).clean()
+        data = super().clean()
         x, y, z = map(data.get, ("x", "y", "z"))
         # Create bbox from NW and SE tile corners.
         try:

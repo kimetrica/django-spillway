@@ -5,7 +5,7 @@ sep = r"/"
 # Regex for an optional file extension.
 format_suffix = r"(?:\.(?P<format>[\w.]+))?"
 # Regex groups for a tile URL in {z}/{x}/{y}.{format} order.
-tile = ("(?P<z>\d+)", "(?P<x>\d+)", "(?P<y>\d+)%s/?$" % format_suffix)
+tile = (r"(?P<z>\d+)", r"(?P<x>\d+)", r"(?P<y>\d+)%s/?$" % format_suffix)
 tileregex = sep.join(tile)
 
 

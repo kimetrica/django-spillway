@@ -3,7 +3,7 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.settings import api_settings
 
 
-class ModelSerializerMixin(object):
+class ModelSerializerMixin:
     """Provides generic model serializer classes to views."""
 
     model_serializer_class = None
@@ -20,7 +20,7 @@ class ModelSerializerMixin(object):
         return DefaultSerializer
 
 
-class ResponseExceptionMixin(object):
+class ResponseExceptionMixin:
     """Handle response exceptions by negotating among default renderers.
 
     The default exception handler passes error message dicts to the renderer

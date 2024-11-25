@@ -19,7 +19,7 @@ urlpatterns = [
         name="location-tiles",
     ),
     url(
-        tilepath("^maptiles/(?P<pk>\d+)/"),
+        tilepath(r"^maptiles/(?P<pk>\d+)/"),
         views.RasterTileView.as_view(queryset=RasterStore.objects.all()),
         name="map-tiles",
     ),

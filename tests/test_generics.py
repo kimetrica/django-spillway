@@ -219,8 +219,8 @@ class PaginatedGeoListViewTestCase(TestCase):
 class RasterListViewTestCase(RasterStoreTestBase):
     def test_list_apidoc(self):
         response = self.client.get("/rasters/", {"format": "api"})
-        self.assertRegexpMatches(
-            response.content.decode("utf-8"), "image.+?http://.*\.tif"
+        self.assertRegex(
+            response.content.decode("utf-8"), r"image.+?http://.*\.tif"
         )
         point = self.object.geom.centroid
         response = self.client.get("/rasters/", {"format": "api", "g": point.wkt})
@@ -228,7 +228,7 @@ class RasterListViewTestCase(RasterStoreTestBase):
 
     def test_list_json(self):
         d = self.client.get("/rasters/").json()
-        self.assertRegexpMatches(d[0]["image"], "^http://.*\.tif$")
+        self.assertRegex(d[0]["image"], r"^http://.*\.tif$")
 
     def test_list_json_array(self):
         with Raster(self.object.image.path) as r:
